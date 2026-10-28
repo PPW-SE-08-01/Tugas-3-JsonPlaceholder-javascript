@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API CRUD - JSONPlaceholder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Fetch API CRUD (JSONPlaceholder)</h1>
+
+    <!-- GET -->
+    <div class="card">
+        <h2>📥 GET — Ambil Data</h2>
+        <div id="output-get"></div>
+    </div>
+
+    <!-- POST -->
+    <div class="card">
+        <h2>📤 POST — Tambah Data</h2>
+        <input type="text" id="postTitle" placeholder="Judul">
+        <input type="text" id="postBody" placeholder="Isi">
+        <input type="number" id="postUserId" value="1" placeholder="User ID">
+        <button class="btn-post" onclick="postData()">Kirim (POST)</button>
+        <div id="output-post"></div>
+    </div>
+
+    <!-- PUT -->
+    <div class="card">
+        <h2>🔄 PUT — Update Data</h2>
+        <input type="number" id="putId" value="1" placeholder="ID">
+        <input type="text" id="putTitle" placeholder="Judul baru">
+        <input type="text" id="putBody" placeholder="Isi baru">
+        <input type="number" id="putUserId" value="1" placeholder="User ID">
+        <button class="btn-put" onclick="putData()">Update (PUT)</button>
+        <div id="output-put"></div>
+    </div>
+
+    <!-- DELETE -->
+    <div class="card">
+        <h2>🗑️ DELETE — Hapus Data</h2>
+        <input type="number" id="delId" value="1" placeholder="ID yang dihapus">
+        <button class="btn-del" onclick="deleteData()">Hapus (DELETE)</button>
+        <div id="output-del"></div>
+    </div>
+
+    <!-- Respons API -->
+    <div class="card">
+        <h2>🔍 Respons API</h2>
+        <pre id="response"></pre>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
