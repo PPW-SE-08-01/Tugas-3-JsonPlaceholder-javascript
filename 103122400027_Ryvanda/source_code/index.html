@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum Fetch API - 103122400027 - Ryvanda</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-container">
+        <header class="app-header">
+            <h1>Praktikum Fetch API & Asynchronous JavaScript</h1>
+            <div class="identity-badge">
+                <span>Nama: <strong>Ryvanda</strong></span>
+                <span>NIM: <strong>103122400027</strong></span>
+            </div>
+            <p class="subtitle">Implementasi metode HTTP (GET, POST, PUT, DELETE) menggunakan JSONPlaceholder API</p>
+        </header>
+
+        <main class="content-grid">
+            <!-- 1. GET SECTION -->
+            <section class="crud-card card-get" id="card-get">
+                <div class="card-title">
+                    <h2>GET - Ambil Data Post</h2>
+                    <span class="method-tag tag-get">GET</span>
+                </div>
+                <p class="card-desc">Mengambil data post dari API berdasarkan ID atau memuat daftar data.</p>
+                <div class="form-row">
+                    <input type="number" id="input-get-id" placeholder="ID Post (1 - 100)" value="1" min="1" max="100">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-get" onclick="ambilPost()">Ambil Data (GET)</button>
+                        <button type="button" class="btn btn-outline" onclick="ambilBanyakPost(3)">Tampilkan 3 Post</button>
+                    </div>
+                </div>
+                <div id="output-get" class="output-container"></div>
+            </section>
+
+            <!-- 2. POST SECTION -->
+            <section class="crud-card card-post" id="card-post">
+                <div class="card-title">
+                    <h2>POST - Tambah Data Post Baru</h2>
+                    <span class="method-tag tag-post">POST</span>
+                </div>
+                <p class="card-desc">Mengirimkan data post baru ke server menggunakan payload JSON.</p>
+                <div class="form-stack">
+                    <div class="input-field">
+                        <label for="post-title">Judul Post:</label>
+                        <input type="text" id="post-title" placeholder="Masukkan judul" value="Mempelajari Fetch API Modern">
+                    </div>
+                    <div class="input-field">
+                        <label for="post-body">Isi Post:</label>
+                        <textarea id="post-body" rows="3" placeholder="Masukkan isi post">Penggunaan async dan await mempermudah penulisan asynchronous code di JavaScript.</textarea>
+                    </div>
+                    <div class="input-field">
+                        <label for="post-userid">User ID:</label>
+                        <input type="number" id="post-userid" placeholder="User ID" value="1" min="1">
+                    </div>
+                    <button type="button" class="btn btn-post" onclick="tambahPost()">Kirim Data (POST)</button>
+                </div>
+                <div id="output-post" class="output-container"></div>
+            </section>
+
+            <!-- 3. PUT SECTION -->
+            <section class="crud-card card-put" id="card-put">
+                <div class="card-title">
+                    <h2>PUT - Perbarui Data Post</h2>
+                    <span class="method-tag tag-put">PUT</span>
+                </div>
+                <p class="card-desc">Memperbarui seluruh data post yang telah ada berdasarkan ID yang ditentukan.</p>
+                <div class="form-stack">
+                    <div class="input-field">
+                        <label for="put-id">ID Post yang Diperbarui:</label>
+                        <input type="number" id="put-id" placeholder="ID Post (1 - 100)" value="1" min="1" max="100">
+                    </div>
+                    <div class="input-field">
+                        <label for="put-title">Judul Baru:</label>
+                        <input type="text" id="put-title" placeholder="Judul baru" value="Pembaruan Data Post via Fetch API">
+                    </div>
+                    <div class="input-field">
+                        <label for="put-body">Isi Baru:</label>
+                        <textarea id="put-body" rows="3" placeholder="Isi baru">Konten post ini telah berhasil dimutakhirkan menggunakan method PUT.</textarea>
+                    </div>
+                    <div class="input-field">
+                        <label for="put-userid">User ID:</label>
+                        <input type="number" id="put-userid" placeholder="User ID" value="1" min="1">
+                    </div>
+                    <button type="button" class="btn btn-put" onclick="perbaruiPost()">Perbarui Data (PUT)</button>
+                </div>
+                <div id="output-put" class="output-container"></div>
+            </section>
+
+            <!-- 4. DELETE SECTION -->
+            <section class="crud-card card-delete" id="card-delete">
+                <div class="card-title">
+                    <h2>DELETE - Hapus Data Post</h2>
+                    <span class="method-tag tag-delete">DELETE</span>
+                </div>
+                <p class="card-desc">Menghapus data post dari server berdasarkan ID yang dipilih.</p>
+                <div class="form-row">
+                    <input type="number" id="delete-id" placeholder="ID yang akan dihapus" value="1" min="1" max="100">
+                    <button type="button" class="btn btn-delete" onclick="hapusPost()">Hapus Data (DELETE)</button>
+                </div>
+                <div id="output-delete" class="output-container"></div>
+            </section>
+
+            <!-- 5. RAW RESPONSE SECTION -->
+            <section class="crud-card card-response" id="card-response">
+                <div class="card-title">
+                    <h2>Respons API (JSON Mentah)</h2>
+                    <span id="response-status-badge" class="status-badge">Menunggu Permintaan</span>
+                </div>
+                <p class="card-desc">Menampilkan hasil kembalian (response payload) dari server JSONPlaceholder secara real-time.</p>
+                <div class="response-viewer">
+                    <div class="viewer-meta">
+                        <span id="meta-method">Method: -</span>
+                        <span id="meta-url">URL: -</span>
+                    </div>
+                    <pre id="raw-response">// Respons JSON akan muncul di sini setelah aksi dilakukan...</pre>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Tugas Praktikum Pemrograman Web - Fetch API & Asynchronous JavaScript</p>
+            <p>API Endpoint: <a href="https://jsonplaceholder.typicode.com" target="_blank" rel="noopener">JSONPlaceholder</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
