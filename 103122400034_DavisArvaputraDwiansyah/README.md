@@ -2,7 +2,7 @@
 
 
 ## Nama : Davis Arvaputra Dwiansyah
-## NIM : 10312240034
+## NIM : 103122400034
 
 Web sederhana yang mengimplementasikan Fetch API menggunakan JavaScript asynchronous (`async/await`). Aplikasi ini memicu empat metode HTTP dasar (CRUD) yang memanggil endpoint dari **JSONPlaceholder** dan menampilkan hasilnya secara interaktif ke halaman HTML. Respons API juga dapat diperiksa secara langsung melalui area tampilan yang menyajikan data JSON mentah.
 
