@@ -1,0 +1,108 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API CRUD - JSONPlaceholder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="tugas-header">
+        <h1>Fetch API CRUD - JSONPlaceholder</h1>
+        <p>Nama: <strong>Rafael Putra Septava</strong> | NIM: <strong>103122400015</strong> | Kelas:
+            <strong>SE-08-01</strong>
+        </p>
+    </header>
+
+    <main class="container">
+
+        <!-- GET -->
+        <section class="card" aria-labelledby="heading-get">
+            <h2 id="heading-get">1. GET Data</h2>
+            <div id="output-get" class="box-output" aria-live="polite"></div>
+        </section>
+
+        <!-- POST -->
+        <section class="card" aria-labelledby="heading-post">
+            <h2 id="heading-post">2. POST Data</h2>
+            <form class="form-group" onsubmit="postData(); return false;">
+                <div class="field-group">
+                    <label for="postTitle">Judul Post</label>
+                    <input type="text" id="postTitle" placeholder="Masukkan Judul..." required>
+                </div>
+
+                <div class="field-group">
+                    <label for="postBody">Isi Post</label>
+                    <input type="text" id="postBody" placeholder="Masukkan Isi Post..." required>
+                </div>
+
+                <div class="field-group">
+                    <label for="postUserId">User ID</label>
+                    <input type="number" id="postUserId" placeholder="User ID" value="1" required>
+                </div>
+
+                <button type="submit" class="btn-post">Kirim Data</button>
+            </form>
+            <div id="output-post" class="box-output" aria-live="polite"></div>
+        </section>
+
+        <!-- PUT -->
+        <section class="card" aria-labelledby="heading-put">
+            <h2 id="heading-put">3. PUT Data</h2>
+            <form class="form-group" onsubmit="putData(); return false;">
+                <div class="field-group">
+                    <label for="putId">ID Target</label>
+                    <input type="number" id="putId" placeholder="ID Post yang mau diedit" value="1" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="putTitle">Judul Baru</label>
+                    <input type="text" id="putTitle" placeholder="Judul Baru..." required>
+                </div>
+
+                <div class="field-group">
+                    <label for="putBody">Isi Baru</label>
+                    <input type="text" id="putBody" placeholder="Isi Baru..." required>
+                </div>
+
+                <div class="field-group">
+                    <label for="putUserId">User ID</label>
+                    <input type="number" id="putUserId" placeholder="User ID" value="1" required>
+                </div>
+
+                <button type="submit" class="btn-put">Update Data (PUT)</button>
+            </form>
+            <div id="output-put" class="box-output" aria-live="polite"></div>
+        </section>
+
+        <!-- DELETE -->
+        <section class="card" aria-labelledby="heading-del">
+            <h2 id="heading-del">4. DELETE Data</h2>
+            <form class="form-group" onsubmit="deleteData(); return false;">
+                <div class="field-group">
+                    <label for="delId">ID Target</label>
+                    <input type="number" id="delId" placeholder="ID yang mau dihapus..." value="1" required>
+                </div>
+
+                <button type="submit" class="btn-del">Hapus Data</button>
+            </form>
+            <div id="output-del" class="box-output" aria-live="polite"></div>
+        </section>
+
+        <!-- Response-->
+        <aside class="card" aria-labelledby="heading-log">
+            <h2 id="heading-log">🔍 JSON Response </h2>
+            <pre id="response"><code>// Hasil response mentah (JSON) akan muncul di sini...</code></pre>
+        </aside>
+
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
