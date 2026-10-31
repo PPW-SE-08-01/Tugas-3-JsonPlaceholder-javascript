@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fetch API</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <nav class="sticky top-0 z-50 w-full h-14 flex items-center justify-center bg-blue-500 text-blue-50 shadow">
+    <ul class="max-w-lg flex justify-between items-center gap-6 text-sm font-medium">
+      <li class="hover:text-neutral-300 transition-colors duration-200">
+        <a href="#list">List</a>
+      </li>
+      <li class="hover:text-neutral-300 transition-colors duration-200">
+        <a href="#getById">Get by ID</a>
+      </li>
+      <li class="hover:text-neutral-300 transition-colors duration-200">
+        <a href="#create">Create</a>
+      </li>
+      <li class="hover:text-neutral-300 transition-colors duration-200">
+        <a href="#update">Update</a>
+      </li>
+      <li class="hover:text-neutral-300 transition-colors duration-200">
+        <a href="#patch">Patch</a>
+      </li>
+      <li class="hover:text-neutral-300 transition-colors duration-200">
+        <a href="#delete">Delete</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1 class="text-2xl font-bold text-center my-6">Praktikum Fetch API</h1>
+
+  <div class="max-w-4xl mx-auto px-4 pb-16 space-y-8">
+
+    <section id="list" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-blue-600">List Data</h2>
+        <button type="button" id="btnGetList"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+          Ambil Data
+        </button>
+      </div>
+
+      <div class="overflow-x-auto max-h-96">
+        <table class="w-full border-collapse border border-gray-300 text-left text-sm">
+          <thead class="bg-blue-500 text-white sticky top-0">
+            <tr>
+              <th class="border border-gray-300 p-2 text-center w-12">No</th>
+              <th class="border border-gray-300 p-2 text-center w-20">User Id</th>
+              <th class="border border-gray-300 p-2 text-center w-16">Id</th>
+              <th class="border border-gray-300 p-2 w-1/4">Title</th>
+              <th class="border border-gray-300 p-2">Body</th>
+            </tr>
+          </thead>
+          <tbody id="postsTableBody">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4">
+        <label class="block font-medium text-xs text-gray-600 mb-1">Respons JSON:</label>
+        <pre id="resultList"
+          class="p-3 bg-gray-50 border border-gray-200 rounded font-mono text-xs max-h-48 overflow-y-auto whitespace-pre-wrap"></pre>
+      </div>
+    </section>
+
+    <section id="getById" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+      <h2 class="text-xl font-bold text-blue-600 mb-4">Get by ID</h2>
+      <div class="flex gap-2 mb-4">
+        <input type="number" id="inputIdGet" placeholder="Masukkan ID (contoh: 1)"
+          class="border border-gray-300 rounded p-2 flex-1 focus:outline-none focus:border-blue-500" />
+        <button type="button" id="btnGetById"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+          Cari
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block font-medium text-sm text-gray-700 mb-1">Tampilan UI:</label>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 text-left text-sm">
+              <thead class="bg-blue-500 text-white">
+                <tr>
+                  <th class="border border-gray-300 p-2 text-center w-20">User Id</th>
+                  <th class="border border-gray-300 p-2 text-center w-16">Id</th>
+                  <th class="border border-gray-300 p-2 w-1/4">Title</th>
+                  <th class="border border-gray-300 p-2">Body</th>
+                </tr>
+              </thead>
+              <tbody id="uiGetById">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-xs text-gray-600 mb-1">Respons JSON:</label>
+          <pre id="resultGetById"
+            class="p-3 bg-gray-50 border border-gray-200 rounded font-mono text-xs max-h-36 overflow-y-auto whitespace-pre-wrap"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="create" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+      <h2 class="text-xl font-bold text-blue-600 mb-4">Create Post</h2>
+      <form id="formCreate" class="space-y-3 mb-4" onsubmit="return false;">
+        <div>
+          <label for="createUserId" class="block font-medium text-sm text-gray-700 mb-1">User ID</label>
+          <input type="number" id="createUserId" placeholder="User Id (contoh 1)"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="createTitle" class="block font-medium text-sm text-gray-700 mb-1">Title</label>
+          <input type="text" id="createTitle" placeholder="Judul post (contoh: Post Title)"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="createBody" class="block font-medium text-sm text-gray-700 mb-1">Body</label>
+          <textarea id="createBody" rows="3" placeholder="Isi konten post (contoh: Post Body)"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+        <button type="button" id="btnCreate"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+          Kirim
+        </button>
+      </form>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block font-medium text-sm text-gray-700 mb-1">Tampilan UI:</label>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 text-left text-sm">
+              <thead class="bg-blue-500 text-white">
+                <tr>
+                  <th class="border border-gray-300 p-2 text-center w-20">User Id</th>
+                  <th class="border border-gray-300 p-2 text-center w-16">Id</th>
+                  <th class="border border-gray-300 p-2 w-1/4">Title</th>
+                  <th class="border border-gray-300 p-2">Body</th>
+                </tr>
+              </thead>
+              <tbody id="uiCreate">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-xs text-gray-600 mb-1">Respons JSON:</label>
+          <pre id="resultCreate"
+            class="p-3 bg-gray-50 border border-gray-200 rounded font-mono text-xs max-h-36 overflow-y-auto whitespace-pre-wrap"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="update" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+      <h2 class="text-xl font-bold text-blue-600 mb-4">Update Post</h2>
+      <form id="formUpdate" class="space-y-3 mb-4" onsubmit="return false;">
+        <div>
+          <label for="updateId" class="block font-medium text-sm text-gray-700 mb-1">ID Target</label>
+          <input type="number" id="updateId" placeholder="Contoh: 1"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="updateUserId" class="block font-medium text-sm text-gray-700 mb-1">User ID</label>
+          <input type="number" id="updateUserId" placeholder="User ID (contoh 1)"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="updateTitle" class="block font-medium text-sm text-gray-700 mb-1">Title Baru</label>
+          <input type="text" id="updateTitle" placeholder="Judul baru"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="updateBody" class="block font-medium text-sm text-gray-700 mb-1">Body Baru</label>
+          <textarea id="updateBody" rows="3" placeholder="Isi baru"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+        <button type="button" id="btnUpdate"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+          Update
+        </button>
+      </form>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block font-medium text-sm text-gray-700 mb-1">Tampilan UI:</label>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 text-left text-sm">
+              <thead class="bg-blue-500 text-white">
+                <tr>
+                  <th class="border border-gray-300 p-2 text-center w-20">User Id</th>
+                  <th class="border border-gray-300 p-2 text-center w-16">Id</th>
+                  <th class="border border-gray-300 p-2 w-1/4">Title</th>
+                  <th class="border border-gray-300 p-2">Body</th>
+                </tr>
+              </thead>
+              <tbody id="uiUpdate">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-xs text-gray-600 mb-1">Respons JSON:</label>
+          <pre id="resultUpdate"
+            class="p-3 bg-gray-50 border border-gray-200 rounded font-mono text-xs max-h-36 overflow-y-auto whitespace-pre-wrap">}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="patch" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+      <h2 class="text-xl font-bold text-blue-600 mb-4">Patch Post</h2>
+      <form id="formPatch" class="space-y-3 mb-4" onsubmit="return false;">
+        <div>
+          <label for="patchId" class="block font-medium text-sm text-gray-700 mb-1">ID Target</label>
+          <input type="number" id="patchId" placeholder="Contoh: 1"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="patchTitle" class="block font-medium text-sm text-gray-700 mb-1">Title Baru</label>
+          <input type="text" id="patchTitle" placeholder="Judul baru"
+            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-blue-500" />
+        </div>
+        <button type="button" id="btnPatch"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+          Patch
+        </button>
+      </form>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block font-medium text-sm text-gray-700 mb-1">Tampilan UI:</label>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 text-left text-sm">
+              <thead class="bg-blue-500 text-white">
+                <tr>
+                  <th class="border border-gray-300 p-2 text-center w-16">Id</th>
+                  <th class="border border-gray-300 p-2">Title</th>
+                </tr>
+              </thead>
+              <tbody id="uiPatch">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-xs text-gray-600 mb-1">Respons JSON:</label>
+          <pre id="resultPatch"
+            class="p-3 bg-gray-50 border border-gray-200 rounded font-mono text-xs max-h-36 overflow-y-auto whitespace-pre-wrap"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="delete" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+      <h2 class="text-xl font-bold text-blue-600 mb-4">Delete Post</h2>
+      <div class="flex gap-2 mb-4">
+        <input type="number" id="deleteId" placeholder="Masukkan ID post yang ingin dihapus"
+          class="border border-gray-300 rounded p-2 flex-1 focus:outline-none focus:border-blue-500" />
+        <button type="button" id="btnDelete"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+          Hapus
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block font-medium text-sm text-gray-700 mb-1">Tampilan UI:</label>
+          <div id="uiDelete" class="p-3 bg-gray-50 border border-gray-200 rounded text-sm text-gray-800">
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-xs text-gray-600 mb-1">Respons JSON:</label>
+          <pre id="resultDelete"
+            class="p-3 bg-gray-50 border border-gray-200 rounded font-mono text-xs max-h-36 overflow-y-auto whitespace-pre-wrap"></pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="text-center py-6 text-gray-500 text-sm border-t border-gray-300 bg-gray-200">
+    <p>Praktikum Perancangan dan Pemrograman Web</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
