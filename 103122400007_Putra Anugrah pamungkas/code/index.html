@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas 3 - Fetch API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <section class="section">
+      <h2>1. GET (Mengambil Data)</h2>
+      <button id="btn-get">Ambil Data dari API</button>
+    </section>
+
+    <section class="section">
+      <h2>2. POST (Menambahkan Data)</h2>
+      <form id="form-post">
+        <input type="text" id="post-title" placeholder="Judul post" required>
+        <textarea id="post-body" placeholder="Isi post" required></textarea>
+        <button type="submit">Tambah Data</button>
+      </form>
+    </section>
+
+    <section class="section">
+      <h2>3. PUT (Memperbarui Data)</h2>
+      <form id="form-put">
+        <input type="number" id="put-id" placeholder="ID post yang ingin diupdate" required>
+        <input type="text" id="put-title" placeholder="Judul baru" required>
+        <textarea id="put-body" placeholder="Isi baru" required></textarea>
+        <button type="submit">Update Data</button>
+      </form>
+    </section>
+
+    <section class="section">
+      <h2>4. DELETE (Menghapus Data)</h2>
+      <form id="form-delete">
+        <input type="number" id="delete-id" placeholder="ID post yang ingin dihapus" required>
+        <button type="submit">Hapus Data</button>
+      </form>
+    </section>
+
+    <section class="section">
+      <h2>Status Respons API</h2>
+      <p id="status-text">Belum ada aksi yang dijalankan.</p>
+    </section>
+
+    <section class="section">
+      <h2>Daftar Data (Mapping DOM)</h2>
+      <div id="posts-container">
+        <p>Data belum diambil.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
