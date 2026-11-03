@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tugas 3 - JSONPlaceholder Fetch API</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Tugas 3: Fetch API dengan JSONPlaceholder</h1>
+    <p>Praktikum Pemrograman Web. Coba empat metode HTTP (GET, POST, PUT, DELETE) memakai <code>async/await</code>.</p>
+  </header>
+
+  <main class="layout">
+    <section class="workspace" aria-label="Panel metode HTTP">
+      <div class="tabs" role="tablist" aria-label="Metode HTTP">
+        <button class="tab is-active get" role="tab" id="tab-get" aria-selected="true" aria-controls="panel-get" data-target="panel-get">GET</button>
+        <button class="tab post" role="tab" id="tab-post" aria-selected="false" aria-controls="panel-post" data-target="panel-post">POST</button>
+        <button class="tab put" role="tab" id="tab-put" aria-selected="false" aria-controls="panel-put" data-target="panel-put">PUT</button>
+        <button class="tab delete" role="tab" id="tab-delete" aria-selected="false" aria-controls="panel-delete" data-target="panel-delete">DELETE</button>
+      </div>
+
+      <!-- GET -->
+      <div class="panel" id="panel-get" role="tabpanel" aria-labelledby="tab-get">
+        <h2>Ambil data post</h2>
+        <p class="hint">Mengambil data dari <code>/posts</code>. Kosongkan ID untuk mengambil banyak data.</p>
+        <form id="form-get" class="form-row">
+          <label>Jumlah data
+            <select id="get-limit">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="100">100 (semua)</option>
+            </select>
+          </label>
+          <label>ID post (opsional)
+            <input type="number" id="get-id" min="1" max="100" placeholder="1 - 100" />
+          </label>
+          <button type="submit" class="btn get">Ambil data</button>
+        </form>
+        <div id="result-get" class="result" aria-live="polite">
+          <p class="empty">Belum ada data. Tekan "Ambil data".</p>
+        </div>
+      </div>
+
+      <!-- POST -->
+      <div class="panel" id="panel-post" role="tabpanel" aria-labelledby="tab-post" hidden>
+        <h2>Tambah post baru</h2>
+        <p class="hint">Mengirim data baru ke <code>/posts</code>. Server akan membalas dengan ID baru (101).</p>
+        <form id="form-post" class="form-col">
+          <label>Judul
+            <input type="text" id="post-title" required placeholder="Judul post" />
+          </label>
+          <label>Isi
+            <textarea id="post-body" rows="4" required placeholder="Isi post"></textarea>
+          </label>
+          <label>User ID
+            <input type="number" id="post-userId" min="1" max="10" value="1" required />
+          </label>
+          <button type="submit" class="btn post">Tambah post</button>
+        </form>
+        <div id="result-post" class="result" aria-live="polite">
+          <p class="empty">Isi formulir lalu tekan "Tambah post".</p>
+        </div>
+      </div>
+
+      <!-- PUT -->
+      <div class="panel" id="panel-put" role="tabpanel" aria-labelledby="tab-put" hidden>
+        <h2>Perbarui post</h2>
+        <p class="hint">Mengganti seluruh data post dengan ID tertentu (1 - 100) lewat <code>/posts/{id}</code>.</p>
+        <form id="form-put" class="form-col">
+          <label>ID post
+            <input type="number" id="put-id" min="1" max="100" value="1" required />
+          </label>
+          <label>Judul baru
+            <input type="text" id="put-title" required placeholder="Judul baru" />
+          </label>
+          <label>Isi baru
+            <textarea id="put-body" rows="4" required placeholder="Isi baru"></textarea>
+          </label>
+          <label>User ID
+            <input type="number" id="put-userId" min="1" max="10" value="1" required />
+          </label>
+          <button type="submit" class="btn put">Perbarui post</button>
+        </form>
+        <div id="result-put" class="result" aria-live="polite">
+          <p class="empty">Isi formulir lalu tekan "Perbarui post".</p>
+        </div>
+      </div>
+
+      <!-- DELETE -->
+      <div class="panel" id="panel-delete" role="tabpanel" aria-labelledby="tab-delete" hidden>
+        <h2>Hapus post</h2>
+        <p class="hint">Menghapus post dengan ID tertentu lewat <code>/posts/{id}</code>.</p>
+        <form id="form-delete" class="form-row">
+          <label>ID post
+            <input type="number" id="delete-id" min="1" max="100" value="1" required />
+          </label>
+          <button type="submit" class="btn delete">Hapus post</button>
+        </form>
+        <div id="result-delete" class="result" aria-live="polite">
+          <p class="empty">Masukkan ID lalu tekan "Hapus post".</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="inspector" aria-label="Respons API">
+      <h2>Respons API</h2>
+      <dl class="meta">
+        <div><dt>Metode</dt><dd id="meta-method">-</dd></div>
+        <div><dt>Status</dt><dd id="meta-status">-</dd></div>
+        <div><dt>Waktu</dt><dd id="meta-time">-</dd></div>
+        <div class="wide"><dt>URL</dt><dd id="meta-url">-</dd></div>
+      </dl>
+      <pre id="raw-json" tabindex="0">Belum ada permintaan.</pre>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>Data berasal dari <a href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noopener">JSONPlaceholder</a>. API ini hanya simulasi, jadi data tidak benar-benar tersimpan di server.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
