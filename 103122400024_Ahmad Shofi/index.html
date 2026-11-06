@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 3 - JSONPlaceholder CRUD</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>JSONPlaceholder CRUD</h1>
+            <p>
+                Tugas Praktikum Pemrograman Web
+                <br>
+                Fetch API & Asynchronous JavaScript
+            </p>
+        </header>
+
+        <div class="info">
+            <div class="info-card">
+                <h3>Total Postingan</h3>
+                <h2 id="totalPosts">0</h2>
+            </div>
+
+            <div class="info-card">
+                <h3>API Endpoint</h3>
+                <h2>/posts</h2>
+            </div>
+
+            <div class="info-card">
+                <h3>Status API</h3>
+                <h2 id="apiStatus">Siap</h2>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <!-- FORM POST DAN PUT -->
+            <section class="card">
+                <h2 id="formTitle">Tambah Postingan</h2>
+                <p class="description">
+                    Gunakan form untuk melakukan POST atau PUT.
+                </p>
+
+                <form id="postForm">
+
+                    <label for="userId">User ID</label>
+                    <input
+                        type="number"
+                        id="userId"
+                        value="1"
+                        min="1"
+                        required
+                    >
+
+                    <label for="title">Judul Postingan</label>
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Masukkan judul"
+                        required
+                    >
+
+                    <label for="body">Isi Postingan</label>
+                    <textarea
+                        id="body"
+                        rows="5"
+                        placeholder="Masukkan isi postingan"
+                        required
+                    ></textarea>
+
+                    <button type="submit" id="submitBtn" class="btn-primary">
+                        Tambah Postingan (POST)
+                    </button>
+
+                    <button type="button" id="cancelBtn" class="btn-cancel" hidden>
+                        Batal Edit
+                    </button>
+
+                </form>
+
+                <p class="note">
+                    Catatan: JSONPlaceholder adalah fake REST API.
+                    Perubahan data hanya disimulasikan.
+                </p>
+            </section>
+
+            <!-- GET DATA -->
+            <section class="card">
+                <div class="section-header">
+                    <div>
+                        <h2>Daftar Postingan</h2>
+                        <p class="description">
+                            Data diambil menggunakan metode GET.
+                        </p>
+                    </div>
+
+                    <span class="badge-get">GET</span>
+                </div>
+
+                <div class="search-bar">
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Cari postingan..."
+                    >
+
+                    <button id="refreshBtn" class="btn-refresh">
+                        Refresh
+                    </button>
+                </div>
+
+                <div id="notification"></div>
+
+                <div id="postList">
+                    <p>Memuat data...</p>
+                </div>
+
+                <div class="pagination">
+                    <button id="prevBtn">Sebelumnya</button>
+                    <span id="pageInfo">Halaman 1</span>
+                    <button id="nextBtn">Berikutnya</button>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- RESPONS API -->
+        <section class="card response-card">
+            <h2>Hasil Respons API</h2>
+            <p class="description">
+                Menampilkan metode HTTP, status, dan JSON hasil request.
+            </p>
+
+            <p id="responseStatus">Belum ada request</p>
+
+            <pre id="responseOutput">{}</pre>
+        </section>
+
+        <footer>
+            <p>
+                Tugas 3 - Pemrograman Web |
+                API: JSONPlaceholder
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
