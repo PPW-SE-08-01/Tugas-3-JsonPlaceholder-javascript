@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONPlaceholder CRUD App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>JSONPlaceholder CRUD</h1>
+        <p>Praktikum Fetch API & Asynchronous JavaScript</p>
+    </header>
+
+    <main>
+        <!-- Form -->
+        <section class="form-section">
+            <h2 id="formTitle">Tambah Postingan</h2>
+
+            <form id="postForm">
+                <input type="hidden" id="postId">
+
+                <label for="title">Judul</label>
+                <input type="text" id="title" placeholder="Masukkan judul" required>
+
+                <label for="body">Isi Postingan</label>
+                <textarea id="body" placeholder="Masukkan isi postingan" required></textarea>
+
+                <button type="submit" id="submitButton">
+                    Tambah Postingan
+                </button>
+
+                <button type="button" id="cancelButton" class="cancel hidden">
+                    Batal Edit
+                </button>
+            </form>
+        </section>
+
+        <!-- Daftar Post -->
+        <section class="posts-section">
+            <div class="section-heading">
+                <h2>Daftar Postingan</h2>
+                <button id="loadButton">Muat Ulang Data</button>
+            </div>
+
+            <p id="status">Memuat data...</p>
+
+            <div id="postContainer" class="post-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Praktikum Pemrograman Web</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
