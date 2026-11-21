@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API CRUD - JSONPlaceholder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="watermark-tag">NIM: 103122400022 | Muhammad Restu Aditya</div>
+        <h1>Fetch API CRUD (JSONPlaceholder)</h1>
+        <p>Praktikum Pemrograman Web - Asynchronous JavaScript (async/await)</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <div class="card-header">
+                <h2>1. GET : Mengambil Data</h2>
+                <span class="badge badge-get">GET</span>
+            </div>
+            <p class="desc">Mengambil data postingan dari endpoint <code>/posts?_limit=3</code>.</p>
+            <div class="action-row">
+                <button type="button" class="btn btn-get" onclick="getPosts()">Ambil Data (GET)</button>
+            </div>
+            <div id="output-get" class="output-box"></div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>2. POST : Menambahkan Data</h2>
+                <span class="badge badge-post">POST</span>
+            </div>
+            <p class="desc">Mengirim data baru ke endpoint <code>/posts</code>.</p>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="post-title">Judul Post</label>
+                    <input type="text" id="post-title" placeholder="Contoh: Belajar Fetch API">
+                </div>
+                <div class="form-group">
+                    <label for="post-userid">User ID</label>
+                    <input type="number" id="post-userid" value="1" placeholder="User ID">
+                </div>
+                <div class="form-group full-width">
+                    <label for="post-body">Isi Post</label>
+                    <input type="text" id="post-body" placeholder="Contoh: Praktikum async/await JavaScript">
+                </div>
+            </div>
+            <button type="button" class="btn btn-post" onclick="createPost()">Kirim Data (POST)</button>
+            <div id="output-post" class="output-box"></div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>3. PUT : Memperbarui Data</h2>
+                <span class="badge badge-put">PUT</span>
+            </div>
+            <p class="desc">Memperbarui data postingan pada endpoint <code>/posts/{id}</code>.</p>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="put-id">ID Post Target</label>
+                    <input type="number" id="put-id" value="1" placeholder="ID Post">
+                </div>
+                <div class="form-group">
+                    <label for="put-userid">User ID</label>
+                    <input type="number" id="put-userid" value="1" placeholder="User ID">
+                </div>
+                <div class="form-group">
+                    <label for="put-title">Judul Baru</label>
+                    <input type="text" id="put-title" placeholder="Judul baru setelah update">
+                </div>
+                <div class="form-group">
+                    <label for="put-body">Isi Baru</label>
+                    <input type="text" id="put-body" placeholder="Isi baru setelah update">
+                </div>
+            </div>
+            <button type="button" class="btn btn-put" onclick="updatePost()">Perbarui Data (PUT)</button>
+            <div id="output-put" class="output-box"></div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>4. DELETE : Menghapus Data</h2>
+                <span class="badge badge-del">DELETE</span>
+            </div>
+            <p class="desc">Menghapus data postingan pada endpoint <code>/posts/{id}</code>.</p>
+            <div class="form-group" style="max-width: 250px;">
+                <label for="del-id">ID Post yang Dihapus</label>
+                <input type="number" id="del-id" value="1" placeholder="ID target">
+            </div>
+            <button type="button" class="btn btn-del" onclick="deletePost()">Hapus Data (DELETE)</button>
+            <div id="output-del" class="output-box"></div>
+        </section>
+
+        <section class="card response-card">
+            <div class="card-header">
+                <h2>Respons API</h2>
+                <span class="badge badge-resp">CONSOLE LOG</span>
+            </div>
+            <pre id="response-box">// Status dan data respons mentah dari fetch() akan tampil di sini...</pre>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>103122400022 - Muhammad Restu Aditya | S1 Rekayasa Perangkat Lunak | Telkom University Purwokerto</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
